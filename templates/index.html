@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AI FPL Squad Generator</title>
+	<style>
+		body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin: 24px; }
+		button { padding: 10px 16px; margin-right: 8px; cursor: pointer; }
+		#results { margin-top: 16px; white-space: pre-wrap; }
+	</style>
+</head>
+<body>
+	<h1>AI FPL Squad Generator</h1>
+	<div>
+		<button id="generateBtn">Generate Squad</button>
+		<button id="reshuffleBtn" disabled>Reshuffle</button>
+	</div>
+	<div id="results"></div>
+	<script>
+	const generateBtn = document.getElementById('generateBtn');
+	const reshuffleBtn = document.getElementById('reshuffleBtn');
+	const results = document.getElementById('results');
+
+	async function callApi(path) {
+		results.textContent = 'Working...';
+		try {
+			const res = await fetch(path);
+			const json = await res.json();
+			results.textContent = JSON.stringify(json, null, 2);
+			reshuffleBtn.disabled = false;
+		} catch (e) {
+			results.textContent = 'Error: ' + e.message;
+		}
+	}
+
+	generateBtn.addEventListener('click', () => callApi('/api/generate'));
+	reshuffleBtn.addEventListener('click', () => callApi('/api/reshuffle'));
+	</script>
+</body>
+</html>
