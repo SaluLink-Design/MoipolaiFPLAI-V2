@@ -2,6 +2,8 @@
 """
 Quick test script to verify the app can start and respond
 Run this locally before deploying to Railway
+
+Usage: python3 test_app.py
 """
 import sys
 

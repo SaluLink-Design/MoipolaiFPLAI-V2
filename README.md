@@ -15,7 +15,7 @@ A Flask app that generates optimal Fantasy Premier League squads for each gamewe
 3. Run:
    
    ```bash
-   python app.py
+   python wsgi.py
    ```
 4. Open `http://localhost:5000` and click Generate Squad.
 
