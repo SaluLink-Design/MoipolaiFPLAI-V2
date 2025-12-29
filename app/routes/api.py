@@ -9,6 +9,11 @@ from app.services.optimizer import select_squad
 api_bp = Blueprint("api", __name__)
 
 
+@api_bp.get("/health")
+def health():
+	return jsonify({"status": "ok", "message": "FPL AI API is running"})
+
+
 @api_bp.get("/generate")
 def generate_squad():
 	provider = DataProvider()
