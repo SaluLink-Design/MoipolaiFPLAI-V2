@@ -8,14 +8,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-try:
-    from app import create_app
-    logger.info("Starting FPL AI Backend...")
-    app = create_app()
-    logger.info("Flask app created successfully")
-except Exception as e:
-    logger.error(f"Failed to create Flask app: {e}", exc_info=True)
-    raise
+# Create Flask app at module level (required for gunicorn)
+from app import create_app
+
+logger.info("Starting FPL AI Backend...")
+app = create_app()
+logger.info("Flask app created successfully")
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
